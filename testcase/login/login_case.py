@@ -4,24 +4,21 @@ from common.browser import Browser
 from common.read_config_utils import Config
 from common.login_base import LoginBase
 from common.selenium_base import SeleniumBase
+from common.element_info_utils import ElementUtils
+import t
 
 class LoginCase(SeleniumBase):
-    # def setUp(self) -> None:
-    #     self.basepage = BasePage(Browser().get_driver())
-    #     self.basepage.open_url(Config.get_config_url)
-    #     self.basepage.wait()
-    #
-    # def tearDown(self) -> None:
-    #     self.basepage.quit_browser()
 
-    # def test_login_success(self):
-    #     login = LoginBase(self.basepage.driver)
-    #     login.login_success('admin','DENGdaxin12')
+    success = t.get_isnot('login','username_input')
+    fail = t.get_isnot('login','password_input')
+
+    @unittest.skipIf(True if success == '是' else False,'跳过执行')
     def test_login_success(self):
         '''登录成功测试'''
         login = LoginBase(self.basepage.driver)
         login.default_login()
 
+    @unittest.skipIf(True if fail == '是' else False,'跳过执行')
     def test_login_fail(self):
         '''登录失败测试'''
         login = LoginBase(self.basepage.driver)

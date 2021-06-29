@@ -1,11 +1,10 @@
 import time
 import os
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from common.read_config_utils import Config
 from common.log_utils import logger
-from common.element_info_utils import ElementUtils
+
 current_path = os.path.dirname(__file__)
 screentshop_path = os.path.join(current_path,'..')
 class BasePage(object):
@@ -22,18 +21,24 @@ class BasePage(object):
 
     def input(self,element_info,content):
         element = self.find_element(element_info)
-        element.send_keys(content)
-        logger.info('%s元素输入内容，输入的内容是：%s' % (element_info['element_name'],content))
+        try:
+            element.send_keys(content)
+            logger.info('%s元素输入内容，输入的内容是：%s' % (element_info['element_name'],content))
+        except Exception as e:
+            logger.error('[%s]元素输入内容失败,原因是：%s' % (element_info['element_name'],e))
 
     def find_element(self,element_info):
-        element_name = element_info['element_name']
-        element_type_name = element_info['element_type']
-        element_value = element_info['element_value']
-        timeout = element_info['timeout']
-        if element_type_name == 'xpath':
-            element_type = By.XPATH
-        element = WebDriverWait(self.driver,timeout).until(lambda x: x.find_element(element_type,element_value))
-        logger.info('元素识别成功，元素名称是：%s' % element_name)
+        try:
+            element_name = element_info['element_name']
+            element_type_name = element_info['element_type']
+            element_value = element_info['element_value']
+            timeout = element_info['timeout']
+            if element_type_name == 'xpath':
+                element_type = By.XPATH
+            element = WebDriverWait(self.driver,timeout).until(lambda x: x.find_element(element_type,element_value))
+            logger.info('元素识别成功，元素名称是：%s' % element_name)
+        except Exception as e:
+            logger.error('[%s]元素识别失败' % element_name)
         return element
 
     def click(self,element_info):
@@ -62,9 +67,12 @@ class BasePage(object):
 
     def get_alter_text(self):
         self.timeout(2)
-        alter = self.driver.switch_to.alert
-        alter_text = alter.text
-        logger.info('获取alter弹窗文案，文案为：[%s]' % alter_text)
+        try:
+            alter = self.driver.switch_to.alert
+            alter_text = alter.text
+            logger.info('获取alter弹窗文案，文案为：[%s]' % alter_text)
+        except Exception as e:
+            logger.error('获取alter弹窗文案失败，原因是：%s' % e)
         return alter_text
 
 if __name__=='__main__':

@@ -6,7 +6,7 @@ from common.read_config_utils import Config
 class MainPage(BasePage):
     def __init__(self,driver):
         super().__init__(driver)
-        element = ElementUtils('main').get_elements_info()
+        element = ElementUtils('main_suite','main').get_elements_info()
         self.bug_menu_click = element['bug_click']
         self.user_info = element['user_info']
         self.quit_login = element['quit_login']

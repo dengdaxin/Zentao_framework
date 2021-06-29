@@ -10,7 +10,7 @@ from common.browser import Browser
 class LoginPage(BasePage):
     def __init__(self,driver):
         super().__init__(driver)
-        element = ElementUtils('login').get_elements_info()
+        element = ElementUtils('login_suite','login').get_elements_info()
         self.username_input = element['username_input']
         self.password_input = element['password_input']
         self.click_login_button = element['login_click']
