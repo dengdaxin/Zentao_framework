@@ -2,8 +2,9 @@ import unittest
 import os
 import time
 from BeautifulReport import BeautifulReport
+from common.email_utils import EmailUtils
 current = os.path.dirname(__file__)
-report_path = os.path.join(current,'report')
+report_path = os.path.join(current,'report/禅道UI自动化测试报告V1.0')
 suite = unittest.defaultTestLoader.discover(start_dir='testcase',
                                             pattern='*_case.py',
                                             top_level_dir='testcase')

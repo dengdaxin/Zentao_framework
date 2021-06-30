@@ -6,7 +6,7 @@ config_path = os.path.join(current_path, '../conf/config.ini')
 class ReadconfigUtils(object):
     def __init__(self,config_path=config_path):
         self.config = configparser.ConfigParser()
-        self.config.read(config_path)
+        self.config.read(config_path,encoding='utf-8')
 
     @property
     def get_config_url(self):
@@ -43,6 +43,36 @@ class ReadconfigUtils(object):
         value = self.config.get('default', 'password')
         return value
 
+    @property
+    def email_smtp_server(self):
+        value = self.config.get('email', 'smtp_server')
+        return value
+
+    @property
+    def email_smtp_sender(self):
+        value = self.config.get('email', 'smtp_sender')
+        return value
+
+    @property
+    def email_smtp_password(self):
+        value = self.config.get('email', 'smtp_password')
+        return value
+
+    @property
+    def email_smtp_receiver(self):
+        value = self.config.get('email', 'smtp_receiver')
+        return value
+
+    @property
+    def email_smtp_cc(self):
+        value = self.config.get('email', 'smtp_cc')
+        return value
+
+    @property
+    def email_smtp_subject(self):
+        value = self.config.get('email', 'smtp_subject')
+        return value
+
 Config = ReadconfigUtils()
 if __name__=='__main__':
-    print(Config.get_screentshot_path)
+    print(Config.email_smtp_subject)
