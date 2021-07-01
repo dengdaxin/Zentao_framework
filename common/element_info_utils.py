@@ -17,15 +17,15 @@ class ElementUtils:
             if self.module_name == self.sheet.cell_value(i,2):
                 element = {}
                 element['element_name'] = self.sheet.cell_value(i,1)
-                element['isnot'] = self.sheet.cell_value(i,3)
-                element['element_type'] = self.sheet.cell_value(i,4)
-                element['element_value'] = self.sheet.cell_value(i,5)
-                element['timeout'] = self.sheet.cell_value(i,6)
+                element['element_type'] = self.sheet.cell_value(i,3)
+                element['element_value'] = self.sheet.cell_value(i,4)
+                element['timeout'] = self.sheet.cell_value(i,5)
                 element_infos[self.sheet.cell_value(i,0)] = element
         return element_infos
 
 if __name__=='__main__':
-    element = ElementUtils('login','login')
+    element = ElementUtils('login_suite','login')
     elem = element.get_elements_info()
-    e = elem['username_input']
-    print(e['isnot'])
+    for i in elem.items():
+        print(i)
+

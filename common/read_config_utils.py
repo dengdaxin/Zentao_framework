@@ -44,6 +44,11 @@ class ReadconfigUtils(object):
         return value
 
     @property
+    def test_data_path(self):
+        value = self.config.get('default', 'test_data_path')
+        return value
+
+    @property
     def email_smtp_server(self):
         value = self.config.get('email', 'smtp_server')
         return value
@@ -75,4 +80,4 @@ class ReadconfigUtils(object):
 
 Config = ReadconfigUtils()
 if __name__=='__main__':
-    print(Config.email_smtp_subject)
+    print(Config.email_smtp_cc)
