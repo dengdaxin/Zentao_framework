@@ -49,6 +49,16 @@ class ReadconfigUtils(object):
         return value
 
     @property
+    def get_log_path(self):
+        value = self.config.get('default', 'log_path')
+        return value
+
+    @property
+    def log_level(self):
+        value = self.config.get('default', 'log_level')
+        return int(value)
+
+    @property
     def email_smtp_server(self):
         value = self.config.get('email', 'smtp_server')
         return value
@@ -80,4 +90,4 @@ class ReadconfigUtils(object):
 
 Config = ReadconfigUtils()
 if __name__=='__main__':
-    print(Config.email_smtp_cc)
+    print(type(Config.log_level))

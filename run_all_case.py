@@ -40,7 +40,7 @@ class RunAllCases:
 if __name__ == '__main__':
     report_path = RunAllCases().run()
     #seamil(report_path, 'test_report%s.html' % time.strftime('%Y_%m_%d_%H_%M_%S'))  # 把测试结果做为附件发发送
-    EmailUtils('<h3 align="center">禅道自动化测试报告</h3>',report_path).send_mail()
+    #EmailUtils('<h3 align="center">禅道自动化测试报告</h3>',report_path).send_mail()
 
 
 

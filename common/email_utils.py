@@ -7,6 +7,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from common.read_config_utils import Config
+from common.log_utils import logger
 
 class EmailUtils():
     def __init__(self,smtp_body,smtp_attch_path=None):
@@ -34,11 +35,13 @@ class EmailUtils():
         return message
 
     def send_mail(self):
-        smtp = smtplib.SMTP()
-        smtp.connect(self.smtp_server)
-        smtp.login(user=self.smtp_sender, password=self.smtp_password)
-        smtp.sendmail(self.smtp_sender,self.smtp_receiver.split(",")+ self.smtp_cc.split(","), self.mail_message_body().as_string())
-
+        try:
+            smtp = smtplib.SMTP()
+            smtp.connect(self.smtp_server)
+            smtp.login(user=self.smtp_sender, password=self.smtp_password)
+            smtp.sendmail(self.smtp_sender,self.smtp_receiver.split(",")+ self.smtp_cc.split(","), self.mail_message_body().as_string())
+        except Exception as e:
+            logger.error('邮件发送失败，原因是：%s' % e)
 if __name__=='__main__':
     html_path = os.path.dirname(__file__) + '/../report/report2021.html'
     EmailUtils('<h3 align="center">自动测试报告</h3>',html_path).send_mail()

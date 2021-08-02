@@ -35,10 +35,19 @@ class BasePage(object):
             timeout = element_info['timeout']
             if element_type_name == 'xpath':
                 element_type = By.XPATH
+            if element_type_name == 'id':
+                element_type = By.ID
+            if element_type_name == 'name':
+                element_type = By.NAME
+            if element_type_name == 'class':
+                element_type = By.CLASS_NAME
+            if element_type_name == 'css':
+                element_type = By.CSS_SELECTOR
             element = WebDriverWait(self.driver,timeout).until(lambda x: x.find_element(element_type,element_value))
             logger.info('元素识别成功，元素名称是：%s' % element_name)
         except Exception as e:
             logger.error('[%s]元素识别失败' % element_name)
+            self.screentshot()
         return element
 
     def click(self,element_info):
