@@ -90,4 +90,4 @@ class ReadconfigUtils(object):
 
 Config = ReadconfigUtils()
 if __name__=='__main__':
-    print(type(Config.log_level))
+    print(Config.get_driver_type)

@@ -13,6 +13,7 @@ class SeleniumBase(unittest.TestCase):
         self.basepage = BasePage(Browser().get_driver())
         self.basepage.wait()
         self.basepage.open_url(self.url)
+        self.basepage.max_browser()
 
     def tearDown(self) -> None:
         self.basepage.quit_browser()

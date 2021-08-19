@@ -24,7 +24,7 @@ class ElementUtils:
         return element_infos
 
 if __name__=='__main__':
-    element = ElementUtils('login_suite','login')
+    element = ElementUtils('main_suite','main')
     elem = element.get_elements_info()
     for i in elem.items():
         print(i)

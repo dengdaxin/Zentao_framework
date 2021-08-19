@@ -55,6 +55,11 @@ class BasePage(object):
         element.click()
         logger.info('%s元素点击成功'% element_info['element_name'])
 
+    def clear(self,element_info):
+        element = self.find_element(element_info)
+        element.clear()
+        logger.info('%s元素清空内容成功' % element_info['element_name'])
+
     def timeout(self,timeout=Config.get_timeout):
         '''固定等待'''
         time.sleep(timeout)
@@ -83,6 +88,24 @@ class BasePage(object):
         except Exception as e:
             logger.error('获取alter弹窗文案失败，原因是：%s' % e)
         return alter_text
+
+    def max_browser(self):
+        self.driver.maximize_window()
+        logger.info('最大化浏览器')
+
+    def switch_iframe(self,element_info):
+        '''切入表单'''
+        iframe = self.find_element(element_info)
+        self.driver.switch_to.frame(iframe)
+
+    def exit_iframe(self):
+        '''退出表单'''
+        self.driver.switch_to.default_content()
+
+    def execute_script(self):
+        js = "var q=document.documentElement.scrollTop=10000"
+        self.driver.execute_script(js)
+
 
 if __name__=='__main__':
     pass

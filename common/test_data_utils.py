@@ -30,6 +30,6 @@ class TestDataUtils:
         return test_data_infos
 
 if __name__=='__main__':
-    infos = TestDataUtils('login_suite','LoginCase').convert_exceldata_to_testdata()
+    infos = TestDataUtils('test_suite','CreateBugCase').convert_exceldata_to_testdata()
     for i in infos.items():
         print(i)
